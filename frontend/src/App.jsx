@@ -1,9 +1,22 @@
-// main file
+import { Routes, Route } from "react-router-dom";
+import HomePage from "./pages/HomePage.jsx";
+import SurveyPage from "./pages/SurveyPage.jsx";
+import DashBoardPage from "./pages/DashBoard.jsx";
+
+
 function App() {
 
   return (
     <div>
-        <h1>CUNY PulseBoard</h1>
+      <Routes>
+        {/* HomePage route */}
+        <Route path="/" element={<HomePage />} />
+        {/* SurveyPage route */}
+        <Route path="/survey" element={<SurveyPage />} />
+        {/* DashBoardPage route */}
+        <Route path="/dashboard" element={<DashBoardPage/>} />
+
+      </Routes>
     </div>
   )
 }
