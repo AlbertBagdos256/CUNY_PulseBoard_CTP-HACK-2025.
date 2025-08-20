@@ -1,1 +1,9 @@
 @import "tailwindcss";
+
+.block {
+  margin: auto !important;
+}
+
+footer {
+  margin-top: 10%;
+}

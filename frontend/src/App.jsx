@@ -2,23 +2,21 @@ import { Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage.jsx";
 import SurveyPage from "./pages/SurveyPage.jsx";
 import DashBoardPage from "./pages/DashBoard.jsx";
-
+import Header from "./components/Header.jsx";
+import Footer from "./components/Footer.jsx";
 
 function App() {
-
   return (
-    <div>
+    <div className="bg-gray-50 min-h-screen">
+      <Header />
       <Routes>
-        {/* HomePage route */}
         <Route path="/" element={<HomePage />} />
-        {/* SurveyPage route */}
         <Route path="/survey" element={<SurveyPage />} />
-        {/* DashBoardPage route */}
-        <Route path="/dashboard" element={<DashBoardPage/>} />
-
+        <Route path="/dashboard" element={<DashBoardPage />} />
       </Routes>
+      <Footer />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
