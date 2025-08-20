@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Header from "../components/Header.jsx";
 
 export default function Survey() {
   const [formData, setFormData] = useState({
@@ -21,205 +22,239 @@ export default function Survey() {
   };
 
   return (
-  <div className="bg-gradient-to-r from-blue-500 to-purple-500 shadow-lg rounded-xl p-8 w-screen h-screen flex items-center justify-center">
+    <>
+    <Header />
+  <div className="bg-gradient-to-r from-cyan-500 to-purple-500 shadow-lg rounded-xl p-8 w-screen min-h-screen flex items-center justify-center">
     <div className="bg-white shadow-md rounded-lg p-6 w-full max-w-md">
-      <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
-        Student Survey
+      <h2 className="text-2xl font-bold mb-6 text-center text-blue-400">
+        CUNY Student Needs Survey
       </h2>
 
       <form onSubmit={handleSubmit} className="space-y-4">
-        {/* Major */}
+        {/* College */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
-            What is your major?
+            Which college do you attend?
           </label>
-          <input
-            type="text"
-            name="major"
-            value={formData.major}
+          <select
+            name="college"
+            value={formData.college}
             onChange={handleChange}
-            className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none"
-            placeholder="Enter your major"
-          />
+            className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-purple-400 focus:outline-none"
+          >
+            <option value="">Choose...</option>
+            <option value="baruch">Baruch College</option>
+            <option value="bronx">Bronx Community College</option>
+            <option value="brooklyn">Brooklyn College</option>
+            <option value="city">The City College of New York</option>
+            <option value="college_of_staten_island">College of Staten Island</option>
+            <option value="hostos">Hostos Community College</option>
+            <option value="hunter">Hunter College</option>
+            <option value="john_jay">John Jay College of Criminal Justice</option>
+            <option value="kingsborough">Kingsborough Community College</option>
+            <option value="la_guardia">LaGuardia Community College</option>
+            <option value="lehman">Lehman College</option>
+            <option value="medgar_evers">Medgar Evers College</option>
+            <option value="new_york_city_college_of_technology">New York City College of Technology</option>
+            <option value="borough_of_manhattan">Borough of Manhattan Community College</option>
+            <option value="queens">Queens College</option>
+            <option value="queensborough">Queensborough Community College</option>
+            <option value="hostos">Hostos Community College</option>
+            <option value="york">York College</option>
+          </select>
         </div>
+        {/* Major */}
+        <div>
+        <label className="block text-sm font-medium text-gray-700 mb-1">
+          What is your major?
+        </label>
+        <select
+          name="major"
+          value={formData.major}
+          onChange={handleChange}
+          className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none"
+        >
+          <option value="">Choose your major...</option>
+          <option value="Business">Business / Business Administration</option>
+          <option value="Health Professions">Health Professions (Nursing, etc.)</option>
+          <option value="Psychology">Psychology</option>
+          <option value="Biology">Biology / Biological Sciences</option>
+          <option value="Engineering">Engineering</option>
+          <option value="Social Sciences">Social Sciences & History</option>
+          <option value="Computer Science">Computer Science / Information Sciences</option>
+          <option value="Communications">Communications / Journalism</option>
+          <option value="Finance">Finance / Accounting</option>
+          <option value="Criminal Justice">Criminal Justice</option>
+          <option value="Education">Education</option>
+          <option value="Nursing">Nursing</option>
+          <option value="Art">Art / Visual & Performing Arts</option>
+          <option value="English">English</option>
+          <option value="Marketing">Marketing</option>
+          <option value="Anthropology Sociology">Anthropology & Sociology</option>
+          <option value="History">History</option>
+          <option value="Kinesiology">Kinesiology / Physical Therapy</option>
+          <option value="Environmental Science">Environmental Science</option>
+          <option value="Economics">Economics</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+
 
         {/* FAFSA */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
             Do you receive aid from FAFSA?
           </label>
-          <select
-            name="fafsa"
-            value={formData.fafsa}
-            onChange={handleChange}
-            className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-purple-400 focus:outline-none"
-          >
-            <option value="">Choose...</option>
-            <option value="yes">Yes</option>
-            <option value="no">No</option>
-          </select>
+          <div className="flex space-x-4">
+            <label className="flex items-center">
+              <input
+                type="radio"
+                name="fafsa"
+                value="yes"
+                checked={formData.fafsa === "yes"}
+                onChange={handleChange}
+                className="mr-2"
+              />
+              Yes
+            </label>
+            <label className="flex items-center">
+              <input
+                type="radio"
+                name="fafsa"
+                value="no"
+                checked={formData.fafsa === "no"}
+                onChange={handleChange}
+                className="mr-2"
+              />
+              No
+            </label>
+          </div>
         </div>
+
+
         {/* First-Generation College Student */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
             Are you a first-generation college student?
           </label>
-          <select
-            name="firstGen"
-            value={formData.firstGen}
-            onChange={handleChange}
-            className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-purple-400 focus:outline-none"
-          >
-            <option value="">Choose...</option>
-            <option value="yes">Yes</option>
-            <option value="no">No</option>
-          </select>
+          <div className="flex space-x-4">
+            <label className="flex items-center">
+              <input
+                type="radio"
+                name="firstGen"
+                value="yes"
+                checked={formData.firstGen === "yes"}
+                onChange={handleChange}
+                className="mr-2"
+              />
+              Yes
+            </label>
+            <label className="flex items-center">
+              <input
+                type="radio"
+                name="firstGen"
+                value="no"
+                checked={formData.firstGen === "no"}
+                onChange={handleChange}
+                className="mr-2"
+              />
+              No
+            </label>
+          </div>
         </div>
+
         
         {/* Disability */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
             Do you have a disability?
           </label>
-          <select
-            name="disability"
-            value={formData.disability}
-            onChange={handleChange}
-            className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-purple-400 focus:outline-none"
-          >
-            <option value="">Choose...</option>
-            <option value="yes">Yes</option>
-            <option value="no">No</option>
-          </select>
+          <div className="flex space-x-4">
+            <label className="flex items-center">
+              <input
+                type="radio"
+                name="disability"
+                value="yes"
+                checked={formData.disability === "yes"}
+                onChange={handleChange}
+                className="mr-2"
+              />
+              Yes
+            </label>
+            <label className="flex items-center">
+              <input
+                type="radio"
+                name="disability"
+                value="no"
+                checked={formData.disability === "no"}
+                onChange={handleChange}
+                className="mr-2"
+              />
+              No
+            </label>
+          </div>
         </div>
 
        <div>
-      <label className="block text-sm font-medium text-gray-700 mb-1">
-        What is your race?
-      </label>
-      <div className="flex flex-wrap -mx-2">
-        <label className="w-1/2 flex items-center px-2 mb-2">
-          <input
-            type="radio"
-            name="race"
-            value="american_indian"
-            checked={formData.race === "american_indian"}
-            onChange={handleChange}
-            className="mr-2"
-          />
-          American Indian or Alaska Native
+        <label className="block text-sm font-medium text-gray-700 mb-1">
+          What is your race?
         </label>
-        <label className="w-1/2 flex items-center px-2 mb-2">
-          <input
-            type="radio"
-            name="race"
-            value="asian"
-            checked={formData.race === "asian"}
-            onChange={handleChange}
-            className="mr-2"
-          />
-          Asian
-        </label>
-        <label className="w-1/2 flex items-center px-2 mb-2">
-          <input
-            type="radio"
-            name="race"
-            value="black"
-            checked={formData.race === "black"}
-            onChange={handleChange}
-            className="mr-2"
-          />
-          Black or African American
-        </label>
-        <label className="w-1/2 flex items-center px-2 mb-2">
-          <input
-            type="radio"
-            name="race"
-            value="hispanic"
-            checked={formData.race === "hispanic"}
-            onChange={handleChange}
-            className="mr-2"
-          />
-          Hispanic, Latino, or Spanish Origin
-        </label>
-        <label className="w-1/2 flex items-center px-2 mb-2">
-          <input
-            type="radio"
-            name="race"
-            value="middle_eastern"
-            checked={formData.race === "middle_eastern"}
-            onChange={handleChange}
-            className="mr-2"
-          />
-          Middle Eastern or North African
-        </label>
-        <label className="w-1/2 flex items-center px-2 mb-2">
-          <input
-            type="radio"
-            name="race"
-            value="white"
-            checked={formData.race === "white"}
-            onChange={handleChange}
-            className="mr-2"
-          />
-          White
-        </label>
-        <label className="w-1/2 flex items-center px-2 mb-2">
-          <input
-            type="radio"
-            name="race"
-            value="mixed"
-            checked={formData.race === "mixed"}
-            onChange={handleChange}
-            className="mr-2"
-          />
-          Mixed
-        </label>
-        <label className="w-1/2 flex items-center px-2 mb-2">
-          <input
-            type="radio"
-            name="race"
-            value="other"
-            checked={formData.race === "other"}
-            onChange={handleChange}
-            className="mr-2"
-          />
-          Other
-        </label>
+        <select
+          name="race"
+          value={formData.race}
+          onChange={handleChange}
+          className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-purple-400 focus:outline-none"
+        >
+          <option value="">Choose...</option>
+          <option value="american_indian">American Indian or Alaska Native</option>
+          <option value="asian">Asian</option>
+          <option value="black">Black or African American</option>
+          <option value="hispanic">Hispanic, Latino, or Spanish Origin</option>
+          <option value="middle_eastern">Middle Eastern or North African</option>
+          <option value="white">White</option>
+          <option value="mixed">Mixed</option>
+          <option value="other">Other</option>
+        </select>
       </div>
-    </div>
 
-    /*{/* CUNY Care Services }
+    {/* CUNY Care Services */}
     <div>
       <label className="block text-sm font-medium text-gray-700 mb-1">
         What kind of CUNY CARE services have you used?
       </label>
-      <input
-        type="text"
-        name="cunyCareServices"
-        value={formData.cunyCareServices}
-        onChange={handleChange}
-        className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none"
-        placeholder="Enter the CUNY CARE services you've used"
-      />
-    </div> /*
+      <select
+          name="cunyCareServices"
+          value={formData.cunyCareServices}
+          onChange={handleChange}
+          className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-purple-400 focus:outline-none"
+        >
+          <option value="">Choose...</option>
+          <option value="academic_advising">Academic Advising</option>
+          <option value="counseling">Counseling Services</option>
+          <option value="financial_aid">Financial Aid Assistance</option>
+          <option value="career_services">Career Services</option>
+          <option value="tutoring">Tutoring Services</option>
+          <option value="disability_services">Disability Services</option>
+          <option value="mental_health">Mental Health Services</option>
+          <option value="none">None</option>
+          <option value="other">Other</option>
+        </select>
+    </div>
 
         {/* Comments */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
-            Additional Comments
+            What kind of support do you feel you need the most?
           </label>
           <textarea
-            name="comments"
-            value={formData.comments}
+            name="support_needs"
+            value={formData.support_needs}
             onChange={handleChange}
             rows="4"
-            className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-green-400 focus:outline-none"
+            className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-purple-400 focus:outline-none"
             placeholder="Share your feedback..."
           />
         </div>
-
-        
 
         {/* Submit */}
         <button
@@ -231,6 +266,7 @@ export default function Survey() {
       </form>
     </div>
   </div>
+    </>
 );
 
 }
