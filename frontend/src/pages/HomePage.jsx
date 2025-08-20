@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaPlus, FaChartLine } from 'react-icons/fa';
+
 export default function HomePage() {
   return (
     <div className="p-8">
