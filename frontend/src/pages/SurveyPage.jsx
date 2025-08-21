@@ -25,7 +25,7 @@ export default function Survey() {
   return (
     <div className="flex flex-col min-h-screen">
     <Header />
-  <div className="bg-gradient-to-r from-cyan-500 to-purple-500 shadow-lg p-8 w-screen flex items-center justify-center">
+  <div className="bg-gradient-to-r shadow-lg p-8 w-screen flex items-center justify-center">
     <div className="bg-white shadow-md rounded-lg p-6 w-full max-w-md">
       <h2 className="text-2xl font-bold mb-6 text-center text-blue-400">
         CUNY Student Needs Survey
