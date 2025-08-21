@@ -4,6 +4,16 @@
   margin: auto !important;
 }
 
-footer {
-  margin-top: 10%;
+.surv-block {
+    min-width: 39%;
+    max-width: 500px;
+}
+
+body {
+    overflow-x: hidden;
+   
+}
+
+.block2 {
+    min-height: 80vh;
 }
