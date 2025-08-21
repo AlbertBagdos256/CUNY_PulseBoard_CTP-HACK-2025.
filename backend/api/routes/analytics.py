@@ -65,6 +65,9 @@ async def get_analytics():
     
     cuny_service_race = await run_sql_file(DB_PATH, SQL_DIR / "Race/cuny_service_race.sql")
     surveys_per_race = await run_sql_file(DB_PATH, SQL_DIR / "Race/surveys_per_race.sql")
+    race_vs_fafsa = await run_sql_file(DB_PATH, SQL_DIR / "Race/race_vs_fafsa.sql")
+    first_gen_race = await run_sql_file(DB_PATH, SQL_DIR / "Race/first_gen_race.sql")
+    top_college_per_race = await run_sql_file(DB_PATH, SQL_DIR / "Race/top_college_per_race.sql")
 
     result = {
         "total_surveys":total_surveys,
@@ -73,7 +76,10 @@ async def get_analytics():
         "top_cuny_services":top_cuny_services,
         "surveys_per_month":surveys_per_month,
         "cuny_service_race":cuny_service_race,
-        "surveys_per_race":surveys_per_race
+        "surveys_per_race":surveys_per_race,
+        "race_vs_fafsa":race_vs_fafsa,
+        "first_gen_race":first_gen_race,
+        "top_college_per_race":top_college_per_race
     }
     end = time.perf_counter()
     exec_time = round(end - start, 6)
