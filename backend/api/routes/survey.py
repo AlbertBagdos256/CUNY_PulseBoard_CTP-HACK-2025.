@@ -1,6 +1,7 @@
 from fastapi import  APIRouter
 from pydantic import BaseModel
 import aiosqlite, asyncio
+from machine_learning import classify_response
 
 # FastAPI router instance for this module
 router = APIRouter()
@@ -25,6 +26,10 @@ async def submit_survey(data: SurveyRequest):
     Receives survey data, classifies the free-response text using ML,
     and stores the survey in the SQLite database.
     """
+    # Run ML classification (non-blocking)
+    classification = await asyncio.to_thread(classify_response, data.free_response)
+    category = classification["Category"]
+    
     return {
-        
+
     }
