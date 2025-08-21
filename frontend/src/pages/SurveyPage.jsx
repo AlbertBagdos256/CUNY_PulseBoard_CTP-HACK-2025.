@@ -71,7 +71,6 @@ export default function SurveyPage() {
             <option value="borough_of_manhattan">Borough of Manhattan Community College</option>
             <option value="queens">Queens College</option>
             <option value="queensborough">Queensborough Community College</option>
-            <option value="hostos">Hostos Community College</option>
             <option value="york">York College</option>
           </select>
         </div>
