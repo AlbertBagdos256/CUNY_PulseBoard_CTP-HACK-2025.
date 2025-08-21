@@ -62,13 +62,18 @@ async def get_analytics():
     count_colleges = await run_sql_file(DB_PATH, SQL_DIR / "count_cuny_colleges.sql")
     top_cuny_services = await run_sql_file(DB_PATH, SQL_DIR / "top_cuny_services.sql")
     surveys_per_month = await run_sql_file(DB_PATH, SQL_DIR / "surveys_per_month.sql")
+    
+    cuny_service_race = await run_sql_file(DB_PATH, SQL_DIR / "Race/cuny_service_race.sql")
+    surveys_per_race = await run_sql_file(DB_PATH, SQL_DIR / "Race/surveys_per_race.sql")
 
     result = {
         "total_surveys":total_surveys,
         "top_colleges":top_colleges,
         "count_colleges":count_colleges,
         "top_cuny_services":top_cuny_services,
-        "surveys_per_month":surveys_per_month
+        "surveys_per_month":surveys_per_month,
+        "cuny_service_race":cuny_service_race,
+        "surveys_per_race":surveys_per_race
     }
     end = time.perf_counter()
     exec_time = round(end - start, 6)

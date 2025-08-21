@@ -17,3 +17,9 @@ body {
 .block2 {
     min-height: 80vh;
 }
+
+@media (max-width: 400px) {
+  .block4 {
+    width: 120px;
+  }
+}
