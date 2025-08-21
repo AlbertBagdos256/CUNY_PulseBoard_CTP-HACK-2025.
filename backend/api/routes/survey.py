@@ -2,6 +2,7 @@ from fastapi import  APIRouter
 from pydantic import BaseModel
 import aiosqlite, asyncio
 from machine_learning import classify_response
+from datetime import datetime
 
 # FastAPI router instance for this module
 router = APIRouter()
@@ -17,6 +18,7 @@ class SurveyRequest(BaseModel):
     first_gen: bool     # Whether the student is a first-generation student
     cuny_service: str   # Service used by the student
     free_response: str  # Open-ended response for ML classification
+    submitted_at: datetime  # Open-ended response for ML classification
 
 
 # Route to submit a survey
@@ -46,8 +48,8 @@ async def submit_survey(data: SurveyRequest):
         await db.execute(
             """
             INSERT INTO surveys 
-            (college, major, fafsa, disability, race, first_gen, cuny_service, desired_service)
-            VALUES (:college, :major, :fafsa, :disability, :race, :first_gen, :cuny_service, :desired_service)
+            (college, major, fafsa, disability, race, first_gen, cuny_service, desired_service, submitted_at)
+            VALUES (:college, :major, :fafsa, :disability, :race, :first_gen, :cuny_service, :desired_service, :submitted_at)
             """,
             {**data.model_dump(), "desired_service": service_category}
         )

@@ -28,7 +28,8 @@ export default function SurveyPage() {
         first_gen: formData.firstGen === "yes",
         race: formData.race,
         cuny_service: formData.cunyCareServices,
-        free_response: formData.support_needs
+        free_response: formData.support_needs,
+        submitted_at: new Date().toISOString()
     };
     console.log(JSON.stringify(payload))
 };

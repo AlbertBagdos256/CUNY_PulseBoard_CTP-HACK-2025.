@@ -8,7 +8,7 @@ import time
 router = APIRouter()
 # Define base paths for queries and DB.
 BASE_DIR = Path(__file__).parent        # backend/api/routes
-SQL_DIR = BASE_DIR.parent / "queries"   # backend/queries
+SQL_DIR = BASE_DIR.parent / "sql_queries"   # backend/queries
 DB_PATH = BASE_DIR.parent / "surveys.db"  # adjust if DB is here
 
 async def run_sql_file(db_path, sql_file: Path):
@@ -58,9 +58,17 @@ async def get_analytics():
     start = time.perf_counter()
 
     total_surveys = await run_sql_file(DB_PATH, SQL_DIR / "total_surveys.sql")
+    top_colleges = await run_sql_file(DB_PATH, SQL_DIR / "top_performing_colleges.sql")
+    count_colleges = await run_sql_file(DB_PATH, SQL_DIR / "count_cuny_colleges.sql")
+    top_cuny_services = await run_sql_file(DB_PATH, SQL_DIR / "top_cuny_services.sql")
+    surveys_per_month = await run_sql_file(DB_PATH, SQL_DIR / "surveys_per_month.sql")
 
     result = {
-        "total_surveys":total_surveys
+        "total_surveys":total_surveys,
+        "top_colleges":top_colleges,
+        "count_colleges":count_colleges,
+        "top_cuny_services":top_cuny_services,
+        "surveys_per_month":surveys_per_month
     }
     end = time.perf_counter()
     exec_time = round(end - start, 6)

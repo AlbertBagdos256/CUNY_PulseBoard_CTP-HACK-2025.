@@ -1,0 +1,1 @@
+SELECT COUNT(DISTINCT college) as colleges FROM surveys
