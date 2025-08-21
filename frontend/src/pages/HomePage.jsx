@@ -4,7 +4,7 @@ import { FaPlus, FaChartLine } from 'react-icons/fa';
 
 export default function HomePage() {
   return (
-    <div className="p-8">
+    <div className="p-8 block2">
       <div className="max-w-4xl block">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">Welcome, Student!</h1>
