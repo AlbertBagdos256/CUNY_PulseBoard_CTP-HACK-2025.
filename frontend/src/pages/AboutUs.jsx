@@ -140,7 +140,7 @@ const navigate = useNavigate();
               <div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-3">Transparency</h3>
                 <p className="text-gray-700">
-                  Our analytics dashboard provides real-time insights back to the community, ensuring transparency in how 
+                  Our analytics dashboard provides real time insights back to the community, ensuring transparency in how 
                   your data contributes to positive change.
                 </p>
               </div>
@@ -160,7 +160,7 @@ const navigate = useNavigate();
               <div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-3">Contact Information</h3>
                 <div className="space-y-2 text-gray-600">
-                  <p>[Email address]</p>                 
+                  <p>cunypulseboard@gmail.com</p>                 
                 </div>
               </div>
               <div>
