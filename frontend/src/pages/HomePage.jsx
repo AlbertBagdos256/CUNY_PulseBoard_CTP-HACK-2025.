@@ -40,7 +40,7 @@ export default function HomePage() {
             <div className="text-gray-600 text-sm">Total Responses</div>
           </div>
           <div className="bg-white rounded-lg p-6 border border-gray-200">
-            <div className="text-3xl font-bold text-green-600 mb-2">18</div>
+            <div className="text-3xl font-bold text-green-600 mb-2">23</div>
             <div className="text-gray-600 text-sm">CUNY Colleges</div>
           </div>
           <div className="bg-white rounded-lg p-6 border border-gray-200">
