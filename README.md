@@ -19,25 +19,52 @@ CUNY PulseBoard gives students a voice by turning their feedback into data-drive
 ```
 CUNY_PulseBoard/
 ├── frontend/ # React + Vite frontend
-│ ├── public/ # Static files
-│ ├── src/ # Main source code
-│ │ ├── assets/ # Images, icons, ect
-│ │ ├── components/ # Reusable UI components
-│ │ ├── pages/ # Application pages
-│ │ ├── App.jsx # Root React component
-│ │ ├── App.css # Global component styles
-│ │ ├── index.css # Base/global styles
-│ │ └── main.jsx # Entry point for React
-│ ├── index.html # HTML entry point
-│ ├── package.json # Frontend dependencies
-│ ├── vite.config.js # Vite configuration
-│ └── README.md # Frontend-specific documentation
+│   ├── public/ # Static files
+│   ├── src/ # Main source code
+│   │   ├── assets/ # Images, icons, etc
+│   │   ├── components/ # Reusable UI components
+│   │   ├── pages/ # Application pages
+│   │   ├── App.jsx # Root React component
+│   │   ├── App.css # Global component styles
+│   │   ├── index.css # Base/global styles
+│   │   └── main.jsx # Entry point for React
+│   ├── index.html # HTML entry point
+│   ├── package.json # Frontend dependencies
+│   ├── vite.config.js # Vite configuration
+│   └── README.md # Frontend-specific documentation
 │
-├── backend/
-│
+├── backend/ # Python + FastAPI backend
+│   ├── api/ # Core backend application
+│   │   ├── routes/ # API endpoint route definitions
+│   │   ├── sql_queries/ # SQL query files
+│   │   ├── machine_learning.py # Machine learning     
+│   │   ├── main.py # Entry point for FastAPI app
+│   │   ├── mock_data.py # Script 
+│   │   └── surveys.db # SQLite database file
+│   ├── requirements.txt # Backend dependencies (pip)
+│   └── README.md # Backend-specific documentation
 │
 ├── media/ # Screenshots, GIFs, and other assets
-│ └── Animation.gif
+│   └── Animation.gif
 │
 └── README.md # Project documentation
+
 ```
+## 🛠️ Technologies Used
+
+### Frontend
+- **React** – Component-based UI library  
+- **JavaScript (ES6+)** – Core language for dynamic client-side functionality  
+- **Vite** – Fast development server and build tool  
+- **Recharts** – Library for creating interactive charts and data visualizations  
+
+### Backend
+- **Python** – Core backend language  
+- **FastAPI** – Modern web framework for building APIs quickly and efficiently  
+- **SQLite** – Lightweight relational database for survey and user data storage  
+
+### General
+- **Node.js** – Used for frontend tooling and dependency management  
+- **pip** – Python package manager for backend dependencies  
+
+
