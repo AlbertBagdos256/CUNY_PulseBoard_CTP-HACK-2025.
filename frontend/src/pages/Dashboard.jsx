@@ -5,41 +5,23 @@ import {
   Bar,
   LineChart,
   Line,
-  PieChart,
-  Pie,
   XAxis,
   YAxis,
   CartesianGrid,
   Tooltip,
   Legend,
   ResponsiveContainer,
-  Cell,
 } from "recharts";
 
 export default function DashBoardPage() {
   const [selectedCollege, setSelectedCollege] = useState("all");
-  const [selectedTimeframe, setSelectedTimeframe] = useState("30days");
+  const [selectedRace, setSelectedRace] = useState("All");
 
-  const colleges = [
-    "All Colleges",
-    "Baruch College",
-    "Bronx Community College",
-    "Brooklyn College",
-    "The City College of New York",
-    "College of Staten Island",
-    "Hostos Community College",
-    "Hunter College",
-    "John Jay College of Criminal Justice",
-    "Kingsborough Community College",
-    "LaGuardia Community College",
-    "Lehman College",
-    "Medgar Evers College",
-    "New York City College of Technology",
-    "Borough of Manhattan Community College",
-    "Queens College",
-    "Queensborough Community College",
-    "York College",
-  ];
+  const colleges = ["All Colleges","Baruch College","Bronx Community College","Brooklyn College","The City College of New York",
+                    "College of Staten Island","Hostos Community College","Hunter College","John Jay College of Criminal Justice",
+                    "Kingsborough Community College","LaGuardia Community College","Lehman College",
+                    "Medgar Evers College","New York City College of Technology","Borough of Manhattan Community College",
+                    "Queens College","Queensborough Community College","York College"];
 
   
   const [total_surveys, setTotalSurveys] = useState([]);
@@ -83,68 +65,48 @@ export default function DashBoardPage() {
         </div>
 
         {/* Filters */}
+        {/* Filters Section */}
         <div className="bg-white rounded-lg p-6 mb-8 shadow-sm border border-gray-200">
-          <div className="flex flex-wrap gap-4 items-center">
+          <div className="flex flex-wrap gap-6 items-center">
+            {/* Filters label */}
+            <span className="text-sm font-medium text-gray-700">Filters:</span>
+
+            {/* College dropdown */}
             <div className="flex items-center space-x-2">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
-                className="w-5 h-5 text-gray-500"
+              <label className="text-sm font-medium text-gray-700">
+                College:
+              </label>
+              <select
+                value={selectedCollege}
+                onChange={(e) => setSelectedCollege(e.target.value)}
+                className="border block4 border-gray-300 rounded-lg px-3 py-2 text-sm"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
-                />
-              </svg>
-              <span className="text-sm font-medium text-gray-700">
-                Filters:
-              </span>
+                {colleges.map((college, index) => (
+                  <option
+                    key={index}
+                    value={college.toLowerCase().replace(/\s+/g, "-")}
+                  >
+                    {college}
+                  </option>
+                ))}
+              </select>
             </div>
-            <select
-              value={selectedCollege}
-              onChange={(e) => setSelectedCollege(e.target.value)}
-              className="border border-gray-300 rounded-lg px-3 py-2 text-sm"
-            >
-              {colleges.map((college, index) => (
-                <option
-                  key={index}
-                  value={college.toLowerCase().replace(" ", "-")}
-                >
-                  {college}
-                </option>
-              ))}
-            </select>
-            <select
-              value={selectedTimeframe}
-              onChange={(e) => setSelectedTimeframe(e.target.value)}
-              className="border border-gray-300 rounded-lg px-3 py-2 text-sm"
-            >
-              <option value="7days">Last 7 days</option>
-              <option value="30days">Last 30 days</option>
-              <option value="90days">Last 90 days</option>
-              <option value="1year">Last year</option>
-            </select>
-            <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center space-x-2">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
-                className="w-4 h-4"
+
+            {/* Race filter dropdown */}
+            <div className="flex items-center space-x-2">
+              <label className="text-sm font-medium text-gray-700">Race:</label>
+              <select
+                value={selectedRace}
+                onChange={(e) => setSelectedRace(e.target.value)}
+                className="border border-gray-300 rounded-lg px-3 py-2 text-sm"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25M9 16.5v.75m3-3v3M15 12v5.25m-4.5-15H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"
-                />
-              </svg>
-              <span>Export Data</span>
-            </button>
+                <option value="All">All</option>
+                <option value="Asian">Asian</option>
+                <option value="Black">Black</option>
+                <option value="White">White</option>
+                <option value="Hispanic">Hispanic</option>
+              </select>
+            </div>
           </div>
         </div>
 
@@ -228,7 +190,7 @@ export default function DashBoardPage() {
             </div>
 
             <div className="w-full h-72">
-              <ResponsiveContainer width="100%" height="100%">
+              <ResponsiveContainer width="100%"  height={300}>
                 <BarChart
                   data={top_cuny_services}
                   layout="vertical"
@@ -246,7 +208,7 @@ export default function DashBoardPage() {
                   <Tooltip />
                   <Bar
                     dataKey="total_responses"
-                    fill="#2563eb"
+                    fill="#638adcff"
                     barSize={28}
                     radius={[4, 4, 4, 4]}
                   />

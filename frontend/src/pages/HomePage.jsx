@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { FaPlus, FaChartLine } from 'react-icons/fa';
 
 export default function HomePage() {
+
+
   return (
     <div className="p-8 block2">
       <div className="max-w-4xl block">
@@ -36,20 +38,16 @@ export default function HomePage() {
         </div>
         <div className="mt-12 grid md:grid-cols-4 gap-6">
           <div className="bg-white rounded-lg p-6 border border-gray-200">
-            <div className="text-3xl font-bold text-blue-600 mb-2">2,847</div>
+            <div className="text-3xl font-bold text-blue-600 mb-2">1000+</div>
             <div className="text-gray-600 text-sm">Total Responses</div>
           </div>
           <div className="bg-white rounded-lg p-6 border border-gray-200">
-            <div className="text-3xl font-bold text-green-600 mb-2">23</div>
+            <div className="text-3xl font-bold text-green-600 mb-2">15+</div>
             <div className="text-gray-600 text-sm">CUNY Colleges</div>
           </div>
           <div className="bg-white rounded-lg p-6 border border-gray-200">
-            <div className="text-3xl font-bold text-purple-600 mb-2">156</div>
+            <div className="text-3xl font-bold text-purple-600 mb-2">156+</div>
             <div className="text-gray-600 text-sm">Active Surveys</div>
-          </div>
-          <div className="bg-white rounded-lg p-6 border border-gray-200">
-            <div className="text-3xl font-bold text-orange-600 mb-2">94%</div>
-            <div className="text-gray-600 text-sm">Response Rate</div>
           </div>
         </div>
       </div>

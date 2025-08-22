@@ -56,18 +56,24 @@ async def get_analytics():
     """
 
     start = time.perf_counter()
-
+    # general overview
     total_surveys = await run_sql_file(DB_PATH, SQL_DIR / "total_surveys.sql")
     top_colleges = await run_sql_file(DB_PATH, SQL_DIR / "top_performing_colleges.sql")
     count_colleges = await run_sql_file(DB_PATH, SQL_DIR / "count_cuny_colleges.sql")
     top_cuny_services = await run_sql_file(DB_PATH, SQL_DIR / "top_cuny_services.sql")
     surveys_per_month = await run_sql_file(DB_PATH, SQL_DIR / "surveys_per_month.sql")
     
+    # race dashboard
     cuny_service_race = await run_sql_file(DB_PATH, SQL_DIR / "Race/cuny_service_race.sql")
     surveys_per_race = await run_sql_file(DB_PATH, SQL_DIR / "Race/surveys_per_race.sql")
     race_vs_fafsa = await run_sql_file(DB_PATH, SQL_DIR / "Race/race_vs_fafsa.sql")
     first_gen_race = await run_sql_file(DB_PATH, SQL_DIR / "Race/first_gen_race.sql")
     top_college_per_race = await run_sql_file(DB_PATH, SQL_DIR / "Race/top_college_per_race.sql")
+
+    # colleges dashboard
+    college_count = await run_sql_file(DB_PATH, SQL_DIR / "College/college_counts.sql")
+    races_per_college = await run_sql_file(DB_PATH, SQL_DIR / "College/races_per_college.sql")
+    services_per_college = await run_sql_file(DB_PATH, SQL_DIR / "College/services_per_college.sql")
 
     result = {
         "total_surveys":total_surveys,
@@ -79,7 +85,11 @@ async def get_analytics():
         "surveys_per_race":surveys_per_race,
         "race_vs_fafsa":race_vs_fafsa,
         "first_gen_race":first_gen_race,
-        "top_college_per_race":top_college_per_race
+        "top_college_per_race":top_college_per_race,
+        "college_count":college_count,
+        "races_per_college":races_per_college,
+        "services_per_college":services_per_college
+
     }
     end = time.perf_counter()
     exec_time = round(end - start, 6)

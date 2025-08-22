@@ -17,30 +17,15 @@ import {
 export default function DashBoardPage3() {
   // Filters state
   const [selectedCollege, setSelectedCollege] = useState("all");
-  const [selectedTimeframe, setSelectedTimeframe] = useState("30days");
   const [selectedRace, setSelectedRace] = useState("All");
 
   // Dropdown list of colleges
-  const colleges = [
-    "All Colleges",
-    "Baruch College",
-    "Bronx Community College",
-    "Brooklyn College",
-    "The City College of New York",
-    "College of Staten Island",
-    "Hostos Community College",
-    "Hunter College",
-    "John Jay College of Criminal Justice",
-    "Kingsborough Community College",
-    "LaGuardia Community College",
-    "Lehman College",
-    "Medgar Evers College",
-    "New York City College of Technology",
-    "Borough of Manhattan Community College",
-    "Queens College",
-    "Queensborough Community College",
-    "York College",
-  ];
+
+  const colleges = ["all","baruch","bronx","brooklyn","city","college_of_staten_island","hostos","hunter",
+                    "john_jay","kingsborough","la_guardia","lehman","medgar_evers","new_york_city_college_of_technology",
+                    "borough_of_manhattan","queens","queensborough","york"];
+
+  const cuny_services = ["academic_advising","counseling","financial_aid","career_services","tutoring","disability_services", "mental_health"]
 
   // Pie colors
   const COLORS = [
@@ -55,8 +40,9 @@ export default function DashBoardPage3() {
   ];
 
   // Data from API
-  const [cuny_service_race, setCunyServiceRace] = useState([]);
-
+  const [college_count, setCollegeCount] = useState([]);
+  const [races_per_college, racesPerCollege] = useState([]);
+  const [services_per_college, SetservicesPerCollege] = useState([]);
 
   // Race filter → determines which bars show up
   const displayedRaceKeys =
@@ -72,7 +58,9 @@ export default function DashBoardPage3() {
       });
       const data = await res.json();
       console.log("Analytics data:", data);
-      setCunyServiceRace(data.results.cuny_service_race || []);
+      setCollegeCount(data.results.college_count || []);
+      racesPerCollege(data.results.races_per_college || []);
+      SetservicesPerCollege(data.results.services_per_college || []);
     } catch (err) {
       console.error("Failed to fetch analytics:", err);
     }
@@ -81,6 +69,12 @@ export default function DashBoardPage3() {
   useEffect(() => {
     fetchData();
   }, []);
+
+  // Filtered data based on selected college
+  const filteredData =
+    selectedCollege === "all"
+      ? college_count
+      : college_count.filter((c) => c.college === selectedCollege);
 
   return (
     <div className="p-8 bg-gray-50 min-h-screen w-full">
@@ -140,56 +134,49 @@ export default function DashBoardPage3() {
           </div>
         </div>
 
-        {/* Race Services + Race Distribution */}
+        {/* College Services + College Distribution */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8 w-full">
           {/* Bar Chart - Span 2 Columns */}
           <div className="bg-white shadow-xl rounded-2xl p-6 flex flex-col lg:col-span-2">
             <h2 className="text-lg font-semibold mb-4">
-              CUNY Services per Race
+              Total Surveys per college
             </h2>
             <div className="flex-2 min-h-[300px]">
-              
+              <div className="flex-2 min-h-[300px]">
+                <ResponsiveContainer width="100%" height={400}>
+                  <BarChart
+                    layout="vertical"
+                    data={filteredData}
+                    margin={{ top: 20, right: 20, left: -60, bottom: 20 }}
+                  >
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis type="number" />
+                    <YAxis
+                      dataKey="college"
+                      type="category"
+                      width={150}
+                      tick={{ fontSize: 12 }}
+                    />
+                    <Tooltip formatter={(val) => [`${val}`, "Total Surveys"]} />
+                    <Bar
+                      dataKey="total_surveys"
+                      fill="#547dd4ff"
+                      radius={[0, 6, 6, 0]}
+                      barSize={10}
+                    />
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
             </div>
           </div>
 
-          {/* Pie Chart - Span 1 Column */}
+        
           <div className="bg-white shadow-xl rounded-2xl p-6 flex flex-col">
             <h2 className="text-lg font-semibold mb-4">
               Race Distribution (Total Surveys)
             </h2>
             <div className="flex-1 min-h-[300px] flex justify-center items-center">
- 
-            </div>
-          </div>
-        </div>
-
-        {/* Race Charts Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8 w-full">
-          {/* Race vs FAFSA Chart */}
-          <div className="bg-white shadow-xl rounded-2xl p-6 flex flex-col">
-            <h2 className="text-lg font-semibold mb-4">FAFSA Usage by Race</h2>
-            <div className="flex-1">
-       
-            </div>
-          </div>
-
-          {/* Race vs First-Gen Chart */}
-          <div className="bg-white shadow-xl rounded-2xl p-6 flex flex-col">
-            <h2 className="text-lg font-semibold mb-4">
-              First-Gen Status by Race
-            </h2>
-            <div className="flex-1">
-       
-            </div>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Graph Section */}
-          
-
-          {/* Quick Actions */}
-          <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                 <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
             <h2 className="text-lg font-semibold text-gray-900 mb-6">
               Quick Actions
             </h2>
@@ -205,13 +192,91 @@ export default function DashBoardPage3() {
                 </button>
               </Link>
               <Link to="/dashboard3">
-                <button className="w-full but border border-gray-300 hover:border-gray-400 text-gray-700 py-3 px-4 rounded-lg font-medium transition-colors text-sm">
+                <button className="w-full  but border border-gray-300 hover:border-gray-400 text-gray-700 py-3 px-4 rounded-lg font-medium transition-colors text-sm">
                   Colleges Analytics
                 </button>
               </Link>
             </div>
           </div>
+            </div>
+          </div>
         </div>
+
+        <div className="bg-white shadow-xl rounded-2xl p-6 flex flex-col lg:col-span-2">
+          <h2 className="text-lg font-semibold mb-4">Races per College</h2>
+          <div className="flex-2 min-h-[300px]">
+            <ResponsiveContainer width="100%" height={400}>
+              <BarChart
+                data={races_per_college.filter(
+                  (c) =>
+                    selectedCollege === "all" || c.college === selectedCollege
+                )}
+                margin={{ top: 20, right: 20, left: 0, bottom: 60 }}
+              >
+                <CartesianGrid strokeDasharray="3 3" stroke="#e0e0e0" />
+                <XAxis
+                  dataKey="college"
+                  tick={{ fontSize: 12 }}
+                  angle={-45}
+                  textAnchor="end"
+                />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+
+                {displayedRaceKeys.includes("asian") && (
+                  <Bar dataKey="asian" name="Asian" fill="#8884d8" />
+                )}
+                {displayedRaceKeys.includes("black") && (
+                  <Bar dataKey="black" name="Black" fill="#82ca9d" />
+                )}
+                {displayedRaceKeys.includes("white") && (
+                  <Bar dataKey="white" name="White" fill="#ffc658" />
+                )}
+                {displayedRaceKeys.includes("hispanic") && (
+                  <Bar dataKey="hispanic" name="Hispanic" fill="#ca6b5c" />
+                )}
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+
+        <div className="bg-white shadow-xl rounded-2xl p-6 flex flex-col lg:col-span-2">
+          <h2 className="text-lg font-semibold mb-4">Services per College</h2>
+          <div className="flex-2 min-h-[300px]">
+            <ResponsiveContainer width="100%" height={400}>
+              <BarChart
+                data={services_per_college.filter(
+                  (c) =>
+                    selectedCollege === "all" || c.college === selectedCollege
+                )}
+                margin={{ top: 20, right: 20, left: 0, bottom: 60 }}
+              >
+                <CartesianGrid strokeDasharray="3 3" stroke="#e0e0e0" />
+                <XAxis
+                  dataKey="college"
+                  tick={{ fontSize: 12 }}
+                  angle={-45}
+                  textAnchor="end"
+                />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+
+                {cuny_services.map((service, idx) => (
+                  <Bar
+                    key={service}
+                    dataKey={service}
+                    name={service}
+                    fill={COLORS[idx % COLORS.length]}
+                  />
+                ))}
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+
+
       </div>
     </div>
   );

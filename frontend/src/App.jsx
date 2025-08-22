@@ -4,6 +4,7 @@ import SurveyPage from "./pages/SurveyPage.jsx";
 import DashBoardPage from "./pages/Dashboard.jsx";
 import DashBoardPage2 from "./pages/DashBoard2.jsx";
 import DashBoardPage3 from "./pages/DashBoard3.jsx";
+import AboutUsPage from "./pages/AboutUsPage.jsx";
 import Header from "./components/Header.jsx";
 import Footer from "./components/Footer.jsx";
 
@@ -17,6 +18,8 @@ function App() {
         <Route path="/dashboard" element={<DashBoardPage />} />
         <Route path="/dashboard2" element={<DashBoardPage2 />} />
         <Route path="/dashboard3" element={<DashBoardPage3 />} />
+        <Route path="/dashboard3" element={<DashBoardPage3 />} />
+        <Route path="/about" element={<AboutUsPage/>} />
       </Routes>
       <Footer />
     </div>

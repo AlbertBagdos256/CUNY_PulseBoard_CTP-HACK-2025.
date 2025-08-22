@@ -14,3 +14,4 @@ WITH race_college_counts AS (
 SELECT race, college, total_responses
 FROM race_college_counts
 WHERE rn = 1;
+

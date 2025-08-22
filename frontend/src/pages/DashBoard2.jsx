@@ -17,42 +17,17 @@ import {
 export default function DashBoardPage2() {
   // Filters state
   const [selectedCollege, setSelectedCollege] = useState("all");
-  const [selectedTimeframe, setSelectedTimeframe] = useState("30days");
   const [selectedRace, setSelectedRace] = useState("All");
 
   // Dropdown list of colleges
-  const colleges = [
-    "All Colleges",
-    "Baruch College",
-    "Bronx Community College",
-    "Brooklyn College",
-    "The City College of New York",
-    "College of Staten Island",
-    "Hostos Community College",
-    "Hunter College",
-    "John Jay College of Criminal Justice",
-    "Kingsborough Community College",
-    "LaGuardia Community College",
-    "Lehman College",
-    "Medgar Evers College",
-    "New York City College of Technology",
-    "Borough of Manhattan Community College",
-    "Queens College",
-    "Queensborough Community College",
-    "York College",
-  ];
+   const colleges = ["All Colleges","Baruch College","Bronx Community College","Brooklyn College","The City College of New York",
+                    "College of Staten Island","Hostos Community College","Hunter College","John Jay College of Criminal Justice",
+                    "Kingsborough Community College","LaGuardia Community College","Lehman College",
+                    "Medgar Evers College","New York City College of Technology","Borough of Manhattan Community College",
+                    "Queens College","Queensborough Community College","York College"];
 
   // Pie colors
-  const COLORS = [
-    "#8884d8",
-    "#82ca9d",
-    "#ffc658",
-    "#ca6b5c",
-    "#8dd1e1",
-    "#d0ed57",
-    "#a4de6c",
-    "#ff8042",
-  ];
+  const COLORS = ["#8884d8","#82ca9d","#ffc658","#ca6b5c","#8dd1e1","#d0ed57","#a4de6c","#ff8042",];
 
   // Data from API
   const [cuny_service_race, setCunyServiceRace] = useState([]);
@@ -79,7 +54,7 @@ export default function DashBoardPage2() {
       setSurveysRace(data.results.surveys_per_race || []);
       setRaceFafsa(data.results.race_vs_fafsa || []);
       setFirstGenRace(data.results.first_gen_race || []);
-      setTopCollegeRace(data.results.top_college_per_race || []);
+      setTopCollegeRace(data.results.first_gen_race || []);
     } catch (err) {
       console.error("Failed to fetch analytics:", err);
     }
@@ -284,56 +259,29 @@ export default function DashBoardPage2() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Graph Section */}
-          <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
-            <h2 className="text-lg font-semibold text-gray-900 mb-6">
-              Most Popular College per Race
-            </h2>
-            <div className="h-72">
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart
-                  data={top_college_per_race}
-                  margin={{ top: 10, right: 20, left: 0, bottom: 0 }}
-                >
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="college" />
-                  <YAxis />
-                  <Tooltip />
-                  <Bar
-                    dataKey="total_responses"
-                    fill="#2563eb"
-                    radius={[6, 6, 0, 0]}
-                  />
-                </BarChart>
-              </ResponsiveContainer>
-            </div>
-          </div>
-
-          {/* Quick Actions */}
-          <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+        {/* Quick Actions */}
+        <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
             <h2 className="text-lg font-semibold text-gray-900 mb-6">
               Quick Actions
             </h2>
             <div className="space-y-3">
-              <Link to="/dashboard">
-                <button className="w-full but bg-blue-600 hover:bg-blue-700 text-white py-3 px-4 rounded-lg font-medium transition-colors text-sm">
-                  General Overview
-                </button>
+                <Link to = "/dashboard">
+              <button className="w-full but bg-blue-600 hover:bg-blue-700 text-white py-3 px-4 rounded-lg font-medium transition-colors text-sm">
+                General Overview
+              </button>
               </Link>
-              <Link to="/dashboard2">
-                <button className="w-full but border border-gray-300 hover:border-gray-400 text-gray-700 py-3 px-4 rounded-lg font-medium transition-colors text-sm">
-                  Race Analytics
-                </button>
+              <Link to = "/dashboard2">
+              <button className="w-full but border border-gray-300 hover:border-gray-400 text-gray-700 py-3 px-4 rounded-lg font-medium transition-colors text-sm">
+                Race Analytics
+              </button>
               </Link>
-              <Link to="/dashboard3">
-                <button className="w-full but border border-gray-300 hover:border-gray-400 text-gray-700 py-3 px-4 rounded-lg font-medium transition-colors text-sm">
-                  Colleges Analytics
-                </button>
+              <Link to = "/dashboard3">
+              <button className="w-full but border border-gray-300 hover:border-gray-400 text-gray-700 py-3 px-4 rounded-lg font-medium transition-colors text-sm">
+                Colleges Analytics
+              </button>
               </Link>
             </div>
           </div>
-        </div>
       </div>
     </div>
   );
