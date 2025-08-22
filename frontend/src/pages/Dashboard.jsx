@@ -343,21 +343,21 @@ export default function DashBoardPage() {
               Quick Actions
             </h2>
             <div className="space-y-3">
-              <button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 px-4 rounded-lg font-medium transition-colors text-sm">
-                Create New Survey
+                <Link to = "/dashboard">
+              <button className="w-full but bg-blue-600 hover:bg-blue-700 text-white py-3 px-4 rounded-lg font-medium transition-colors text-sm">
+                General Overview
               </button>
+              </Link>
               <Link to = "/dashboard2">
-              <button className="w-full border border-gray-300 hover:border-gray-400 text-gray-700 py-3 px-4 rounded-lg font-medium transition-colors text-sm">
+              <button className="w-full but border border-gray-300 hover:border-gray-400 text-gray-700 py-3 px-4 rounded-lg font-medium transition-colors text-sm">
                 Race Analytics
               </button>
               </Link>
-              
-              <button className="w-full border border-gray-300 hover:border-gray-400 text-gray-700 py-3 px-4 rounded-lg font-medium transition-colors text-sm">
-                View All Responses
+              <Link to = "/dashboard3">
+              <button className="w-full but border border-gray-300 hover:border-gray-400 text-gray-700 py-3 px-4 rounded-lg font-medium transition-colors text-sm">
+                Colleges Analytics
               </button>
-              <button className="w-full border border-gray-300 hover:border-gray-400 text-gray-700 py-3 px-4 rounded-lg font-medium transition-colors text-sm">
-                Export Analytics
-              </button>
+              </Link>
             </div>
           </div>
         </div>

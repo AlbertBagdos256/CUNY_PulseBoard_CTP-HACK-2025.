@@ -14,7 +14,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-export default function DashBoardPage2() {
+export default function DashBoardPage3() {
   // Filters state
   const [selectedCollege, setSelectedCollege] = useState("all");
   const [selectedTimeframe, setSelectedTimeframe] = useState("30days");
@@ -56,10 +56,7 @@ export default function DashBoardPage2() {
 
   // Data from API
   const [cuny_service_race, setCunyServiceRace] = useState([]);
-  const [surveys_per_race, setSurveysRace] = useState([]);
-  const [race_vs_fafsa, setRaceFafsa] = useState([]);
-  const [first_gen_race, setFirstGenRace] = useState([]);
-  const [top_college_per_race, setTopCollegeRace] = useState([]);
+
 
   // Race filter → determines which bars show up
   const displayedRaceKeys =
@@ -76,10 +73,6 @@ export default function DashBoardPage2() {
       const data = await res.json();
       console.log("Analytics data:", data);
       setCunyServiceRace(data.results.cuny_service_race || []);
-      setSurveysRace(data.results.surveys_per_race || []);
-      setRaceFafsa(data.results.race_vs_fafsa || []);
-      setFirstGenRace(data.results.first_gen_race || []);
-      setTopCollegeRace(data.results.top_college_per_race || []);
     } catch (err) {
       console.error("Failed to fetch analytics:", err);
     }
@@ -95,7 +88,7 @@ export default function DashBoardPage2() {
         {/*Page Header */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">
-            Race Analytics Dashboard
+            CUNY Colleges Analytics Dashboard
           </h1>
           <p className="text-gray-600">
             Real-time insights from CUNY student responses
@@ -155,31 +148,7 @@ export default function DashBoardPage2() {
               CUNY Services per Race
             </h2>
             <div className="flex-2 min-h-[300px]">
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart
-                  data={cuny_service_race}
-                  margin={{ top: 20, right: 20, left: 0, bottom: 20 }}
-                >
-                  <CartesianGrid strokeDasharray="3 3" stroke="#e0e0e0" />
-                  <XAxis dataKey="cuny_service" tick={{ fontSize: 12 }} />
-                  <YAxis />
-                  <Tooltip />
-                  <Legend />
-
-                  {displayedRaceKeys.includes("asian") && (
-                    <Bar dataKey="asian" name="Asian" fill="#8884d8" />
-                  )}
-                  {displayedRaceKeys.includes("black") && (
-                    <Bar dataKey="black" name="Black" fill="#82ca9d" />
-                  )}
-                  {displayedRaceKeys.includes("white") && (
-                    <Bar dataKey="white" name="White" fill="#ffc658" />
-                  )}
-                  {displayedRaceKeys.includes("hispanic") && (
-                    <Bar dataKey="hispanic" name="Hispanic" fill="#ca6b5c" />
-                  )}
-                </BarChart>
-              </ResponsiveContainer>
+              
             </div>
           </div>
 
@@ -189,28 +158,7 @@ export default function DashBoardPage2() {
               Race Distribution (Total Surveys)
             </h2>
             <div className="flex-1 min-h-[300px] flex justify-center items-center">
-              <ResponsiveContainer width="100%" height="100%">
-                <PieChart>
-                  <Pie
-                    data={surveys_per_race}
-                    dataKey="total_surveys"
-                    nameKey="race"
-                    cx="50%"
-                    cy="50%"
-                    outerRadius={120}
-                    label
-                  >
-                    {surveys_per_race.map((entry, index) => (
-                      <Cell
-                        key={`cell-${index}`}
-                        fill={COLORS[index % COLORS.length]}
-                      />
-                    ))}
-                  </Pie>
-                  <Tooltip />
-                  <Legend />
-                </PieChart>
-              </ResponsiveContainer>
+ 
             </div>
           </div>
         </div>
@@ -221,31 +169,7 @@ export default function DashBoardPage2() {
           <div className="bg-white shadow-xl rounded-2xl p-6 flex flex-col">
             <h2 className="text-lg font-semibold mb-4">FAFSA Usage by Race</h2>
             <div className="flex-1">
-              <ResponsiveContainer width="100%" height={350}>
-                <BarChart
-                  data={race_vs_fafsa}
-                  margin={{ top: 20, right: 20, left: 0, bottom: 20 }}
-                >
-                  <CartesianGrid strokeDasharray="3 3" stroke="#e0e0e0" />
-                  <XAxis dataKey="race" tick={{ fontSize: 12 }} />
-                  <YAxis />
-                  <Tooltip />
-                  <Legend />
-
-                  <Bar
-                    dataKey="using_fafsa"
-                    barSize={50}
-                    name="Using FAFSA"
-                    fill="#726dcdff"
-                  />
-                  <Bar
-                    dataKey="no_using_fafsa"
-                    barSize={50}
-                    name="Not Using FAFSA"
-                    fill="#cfa150ff"
-                  />
-                </BarChart>
-              </ResponsiveContainer>
+       
             </div>
           </div>
 
@@ -255,60 +179,14 @@ export default function DashBoardPage2() {
               First-Gen Status by Race
             </h2>
             <div className="flex-1">
-              <ResponsiveContainer width="100%" height={350}>
-                <BarChart
-                  data={first_gen_race}
-                  margin={{ top: 20, right: 20, left: 0, bottom: 20 }}
-                >
-                  <CartesianGrid strokeDasharray="3 3" stroke="#e0e0e0" />
-                  <XAxis dataKey="race" tick={{ fontSize: 12 }} />
-                  <YAxis />
-                  <Tooltip />
-                  <Legend />
-
-                  <Bar
-                    dataKey="first_gen"
-                    barSize={50}
-                    name="First-Gen"
-                    fill="#55cba3ff"
-                  />
-                  <Bar
-                    dataKey="non_first_gen"
-                    barSize={50}
-                    name="Non First-Gen"
-                    fill="#d45e5eff"
-                  />
-                </BarChart>
-              </ResponsiveContainer>
+       
             </div>
           </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Graph Section */}
-          <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
-            <h2 className="text-lg font-semibold text-gray-900 mb-6">
-              Most Popular College per Race
-            </h2>
-            <div className="h-72">
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart
-                  data={top_college_per_race}
-                  margin={{ top: 10, right: 20, left: 0, bottom: 0 }}
-                >
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="college" />
-                  <YAxis />
-                  <Tooltip />
-                  <Bar
-                    dataKey="total_responses"
-                    fill="#2563eb"
-                    radius={[6, 6, 0, 0]}
-                  />
-                </BarChart>
-              </ResponsiveContainer>
-            </div>
-          </div>
+          
 
           {/* Quick Actions */}
           <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
